@@ -1,0 +1,39 @@
+[project]
+name = "face-emotion"
+version = "2.0.0"
+description = "Real-time face emotion recognition with OpenCV (YuNet) and Keras 3"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "keras>=3.5",
+    "tensorflow>=2.17",
+    "opencv-python>=4.10",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+train = ["scikit-learn>=1.4"]
+
+[project.scripts]
+face-emotion = "face_emotion.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6", "scikit-learn>=1.4", "pre-commit>=3.7"]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/face_emotion"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "NPY"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
